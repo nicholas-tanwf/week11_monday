@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChronoAI · Week 11 · Nicholas</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#000;--g1:#424245;--g2:#86868b;--blue:#0071e3;--green:#30d158;--orange:#ff9f0a;--purple:#bf5af2;--teal:#64d2ff;--pink:#ff375f}
+body{font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;background:var(--bg);color:#fff;overflow:hidden;height:100vh;width:100vw}
+
+.deck{width:100vw;height:100vh;position:relative}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);transform:translateY(12px);padding:60px 80px}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0)}
+
+.nav{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s}
+.dot.active{background:#fff;width:20px;border-radius:3px}
+.counter{position:fixed;bottom:30px;right:36px;font-size:12px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.1em}
+.arrow{position:fixed;bottom:24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:inherit;border:none}
+.arrow:hover{background:rgba(255,255,255,.14)}
+.arrow.prev{left:calc(50% - 60px)}
+.arrow.next{left:calc(50% + 16px)}
+.bar{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:100}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* typography */
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+.h1{font-size:clamp(52px,6vw,80px);font-weight:900;line-height:1.04;letter-spacing:-.04em}
+.h2{font-size:clamp(36px,4.5vw,58px);font-weight:900;line-height:1.06;letter-spacing:-.035em}
+.sub{font-size:18px;color:rgba(255,255,255,.5);line-height:1.6;max-width:640px}
+.grad{background:linear-gradient(90deg,var(--blue),var(--teal),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.grad-orange{background:linear-gradient(90deg,var(--orange),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.grad-purple{background:linear-gradient(90deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* score badge */
+.score-ring{position:relative;width:120px;height:120px;flex-shrink:0}
+.score-ring svg{transform:rotate(-90deg)}
+.score-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-num{font-size:32px;font-weight:900;color:#fff;line-height:1}
+.score-label{font-size:10px;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+
+/* goal rows */
+.goal-row{display:flex;align-items:flex-start;gap:16px;padding:18px 20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;margin-bottom:10px;transition:border-color .2s}
+.goal-row:hover{border-color:rgba(255,255,255,.14)}
+.goal-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;margin-top:1px}
+.goal-content{flex:1}
+.goal-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:3px}
+.goal-metric{font-size:12px;color:rgba(255,255,255,.4);line-height:1.4}
+.goal-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;flex-shrink:0;margin-top:3px;align-self:flex-start}
+
+/* bet cards */
+.bet{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px 22px;flex:1}
+.bet-icon{font-size:28px;margin-bottom:12px}
+.bet-title{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.bet-body{font-size:14px;color:rgba(255,255,255,.55);line-height:1.6}
+.bet-body strong{color:#fff}
+
+/* outcome rows */
+.outcome{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;margin-bottom:8px}
+.outcome-icon{font-size:20px;flex-shrink:0}
+.outcome-text{font-size:14px;color:rgba(255,255,255,.7);line-height:1.4;flex:1}
+.outcome-text strong{color:#fff;display:block;font-size:15px;margin-bottom:2px}
+.outcome-proof{font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-fill" id="bar"></div></div>
+<div class="nav" id="nav"></div>
+<button class="arrow prev" onclick="go(-1)">←</button>
+<button class="arrow next" onclick="go(1)">→</button>
+<div class="counter" id="ctr"></div>
+
+<div class="deck" id="deck">
+
+<!-- ═══ SLIDE 1: GOALS + SCORE ══════════════════════════════ -->
+<div class="slide active">
+  <div style="width:100%;max-width:1060px">
+    <div style="display:flex;align-items:flex-start;gap:48px;margin-bottom:40px">
+      <div style="flex:1">
+        <div class="eyebrow" style="color:var(--teal)">Week 11 · 10 March 2026</div>
+        <div class="h1" style="margin-bottom:14px">Community.<br><span class="grad">Strategy.</span><br>Pipeline.</div>
+        <p class="sub" style="font-size:16px">Three clear bets this week. Each one moves ChronoAI forward in a measurable, verifiable way.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:8px">
+        <div class="score-ring">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="8"/>
+            <circle cx="60" cy="60" r="52" fill="none" stroke="url(#sg)" stroke-width="8" stroke-linecap="round"
+              stroke-dasharray="326.7" stroke-dashoffset="32.7"/>
+            <defs>
+              <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#30d158"/>
+                <stop offset="100%" stop-color="#64d2ff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="score-inner">
+            <div class="score-num">9</div>
+            <div class="score-label">/ 10</div>
+          </div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em">Goal Audit</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.35);text-align:center;max-width:100px;line-height:1.4">Zero violations. Archived.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="goal-row" style="border-color:rgba(48,209,88,.2)">
+        <div class="goal-num" style="background:rgba(48,209,88,.12);color:var(--green)">1</div>
+        <div class="goal-content">
+          <div class="goal-title">WhatsApp Community — 50+ Qualified Members</div>
+          <div class="goal-metric">AI builders, founders & investors only · Co-promoted with established Singapore AI community · 30%+ engagement rate</div>
+        </div>
+        <div class="goal-badge" style="background:rgba(48,209,88,.1);color:var(--green)">Community</div>
+      </div>
+      <div class="goal-row" style="border-color:rgba(100,210,255,.2)">
+        <div class="goal-num" style="background:rgba(100,210,255,.12);color:var(--teal)">2</div>
+        <div class="goal-content">
+          <div class="goal-title">Lock Down Event Theme + 1 Confirmed Partner</div>
+          <div class="goal-metric">Consultation with Fan · Actionable decision, not a document · Next step agreed with owner + date</div>
+        </div>
+        <div class="goal-badge" style="background:rgba(100,210,255,.1);color:var(--teal)">Strategy</div>
+      </div>
+      <div class="goal-row" style="border-color:rgba(191,90,242,.2)">
+        <div class="goal-num" style="background:rgba(191,90,242,.12);color:var(--purple)">3</div>
+        <div class="goal-content">
+          <div class="goal-title">30+ Qualified Leads via Partner Co-Promotion</div>
+          <div class="goal-metric">1 strategic partner (500+ reach) · Named interest log · Co-promotional content live</div>
+        </div>
+        <div class="goal-badge" style="background:rgba(191,90,242,.1);color:var(--purple)">Pipeline</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 2: THE THINKING ══════════════════════════════ -->
+<div class="slide">
+  <div style="width:100%;max-width:1060px">
+    <div class="eyebrow" style="color:var(--orange);margin-bottom:10px">The Strategic Thinking</div>
+    <div class="h2" style="margin-bottom:6px">Why <span class="grad-orange">these 3.</span></div>
+    <p style="font-size:15px;color:rgba(255,255,255,.45);margin-bottom:32px;max-width:600px">Last week I presented a proposal without enough critical thinking behind it. This week the focus is on building the right foundation — not activity, but leverage.</p>
+
+    <div style="display:flex;gap:16px">
+      <div class="bet" style="border-color:rgba(48,209,88,.15)">
+        <div class="bet-icon">🌱</div>
+        <div class="bet-title" style="color:var(--green)">Community First</div>
+        <div class="bet-body">Management wants an organic AI community — not a ChronoAI marketing channel. <strong>The play:</strong> recruit through First Prompt or ChatandBuild. Their credibility gets us qualified people. Manual blasting gets us noise.</div>
+      </div>
+      <div class="bet" style="border-color:rgba(100,210,255,.15)">
+        <div class="bet-icon">🎯</div>
+        <div class="bet-title" style="color:var(--teal)">Strategy Before Execution</div>
+        <div class="bet-body">I won't present another proposal without field-testing it first. <strong>The play:</strong> consult Fan — someone who has built these events — and lock down the theme and format before any further management review.</div>
+      </div>
+      <div class="bet" style="border-color:rgba(191,90,242,.15)">
+        <div class="bet-icon">⚡</div>
+        <div class="bet-title" style="color:var(--purple)">Convert, Don't Announce</div>
+        <div class="bet-body">Partners are confirmed but passive. <strong>The play:</strong> activate them into co-promotion this week — named leads in a log, not impressions on a post. Every contact in the pipeline is tracked by name.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px 20px;background:rgba(255,159,10,.04);border:1px solid rgba(255,159,10,.15);border-radius:14px;display:flex;align-items:center;gap:14px">
+      <span style="font-size:22px">🧠</span>
+      <p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;margin:0"><strong style="color:#fff">The shift from last week:</strong> Instead of asking management what to do, I'm bringing a tested direction. Fan validates the event. The partners validate the market. The community validates the interest. Management sees results, not questions.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 3: FRIDAY OUTCOMES ══════════════════════════ -->
+<div class="slide">
+  <div style="width:100%;max-width:900px">
+    <div class="eyebrow" style="color:var(--green);margin-bottom:10px">By Friday 13 March</div>
+    <div class="h2" style="margin-bottom:6px">What you'll <span class="grad">see from me.</span></div>
+    <p style="font-size:15px;color:rgba(255,255,255,.45);margin-bottom:32px">Concrete. Verifiable. No ambiguity.</p>
+
+    <div>
+      <div class="outcome" style="background:rgba(48,209,88,.05);border:1px solid rgba(48,209,88,.12)">
+        <div class="outcome-icon">📲</div>
+        <div class="outcome-text">
+          <strong>WhatsApp community screenshot — 50+ qualified members</strong>
+          Builders, founders, investors. Not random joins. Engagement signal tracked.
+        </div>
+        <div class="outcome-proof" style="background:rgba(48,209,88,.12);color:var(--green)">Screenshot</div>
+      </div>
+
+      <div class="outcome" style="background:rgba(100,210,255,.05);border:1px solid rgba(100,210,255,.12)">
+        <div class="outcome-icon">🔒</div>
+        <div class="outcome-text">
+          <strong>Event theme + format — locked and shared with team</strong>
+          Agreed with Fan. 1 partner or speaker committed. Next action has an owner and a date.
+        </div>
+        <div class="outcome-proof" style="background:rgba(100,210,255,.12);color:var(--teal)">Decision Log</div>
+      </div>
+
+      <div class="outcome" style="background:rgba(191,90,242,.05);border:1px solid rgba(191,90,242,.12)">
+        <div class="outcome-icon">📋</div>
+        <div class="outcome-text">
+          <strong>30+ qualified leads — named, tracked, contactable</strong>
+          Interest log with name, profile, and source. Co-promotional content live with partner.
+        </div>
+        <div class="outcome-proof" style="background:rgba(191,90,242,.12);color:var(--purple)">Named Log</div>
+      </div>
+
+      <div class="outcome" style="background:rgba(255,159,10,.05);border:1px solid rgba(255,159,10,.12)">
+        <div class="outcome-icon">🤝</div>
+        <div class="outcome-text">
+          <strong>1 co-promotion agreement — partner with 500+ community reach</strong>
+          Agreement documented. Content published. Reach verified.
+        </div>
+        <div class="outcome-proof" style="background:rgba(255,159,10,.12);color:var(--orange)">Agreement</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center">
+      <div style="padding:8px 18px;border-radius:100px;background:rgba(48,209,88,.08);border:1px solid rgba(48,209,88,.2);font-size:12px;font-weight:700;color:var(--green)">Goal Audit: 9 / 10</div>
+      <div style="padding:8px 18px;border-radius:100px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);font-size:12px;font-weight:700;color:rgba(255,255,255,.5)">Week 11 · Nicholas</div>
+      <div style="padding:8px 18px;border-radius:100px;background:rgba(0,113,227,.08);border:1px solid rgba(0,113,227,.2);font-size:12px;font-weight:700;color:var(--blue)">ChronoAI Marketing & Partnerships</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide'),total=slides.length;
+let cur=0,anim=false;
+const nav=document.getElementById('nav'),bar=document.getElementById('bar'),ctr=document.getElementById('ctr');
+slides.forEach((_,i)=>{const d=document.createElement('button');d.className='dot'+(i===0?' active':'');d.onclick=()=>goTo(i);nav.appendChild(d)});
+function ui(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===cur));bar.style.width=((cur+1)/total*100)+'%';ctr.textContent=(cur+1)+' / '+total}
+function goTo(i){if(anim||i===cur)return;anim=true;slides[cur].classList.remove('active');cur=i;slides[cur].classList.add('active');ui();setTimeout(()=>anim=false,500)}
+function go(d){goTo((cur+d+total)%total)}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1)});
+ui();
+</script>
+</body>
+</html>
