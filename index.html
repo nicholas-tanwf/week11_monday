@@ -10,10 +10,9 @@
 body{font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;background:#000;color:#fff;overflow:hidden;height:100vh;width:100vw}
 
 .deck{width:100vw;height:100vh;position:relative}
-.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(.4,0,.2,1);padding:0 80px}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(.4,0,.2,1);padding:48px 80px;text-align:center}
 .slide.active{opacity:1;pointer-events:all}
 
-/* nav */
 .dots{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100}
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s;padding:0}
 .dot.active{background:#b8ff57;width:22px;border-radius:3px}
@@ -22,51 +21,59 @@ body{font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antiali
 .arr:hover{background:rgba(255,255,255,.12);color:#fff}
 .ctr{position:fixed;bottom:30px;left:36px;font-size:11px;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:.12em}
 
-/* typography */
-.eyebrow{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#b8ff57;margin-bottom:16px}
-.title{font-size:clamp(42px,5vw,68px);font-weight:900;line-height:1.04;letter-spacing:-.04em;color:#fff;margin-bottom:10px}
-.subtitle{font-size:16px;color:rgba(255,255,255,.45);line-height:1.65;max-width:580px;margin-bottom:36px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#b8ff57;margin-bottom:14px}
+.title{font-size:clamp(40px,5vw,66px);font-weight:900;line-height:1.04;letter-spacing:-.04em;color:#fff;margin-bottom:8px}
+.subtitle{font-size:15px;color:rgba(255,255,255,.45);line-height:1.65;max-width:600px;margin:0 auto 28px}
 
-/* 2x2 card grid */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:1060px}
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:26px 24px;position:relative;overflow:hidden}
-.card.featured{background:rgba(184,255,87,.05);border-color:rgba(184,255,87,.2)}
-.card-icon{font-size:22px;margin-bottom:12px;display:block}
-.card-title{font-size:15px;font-weight:800;margin-bottom:8px;line-height:1.3}
+/* 2x2 grid */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:1020px;text-align:left}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px 22px}
+.card.feat{background:rgba(184,255,87,.05);border-color:rgba(184,255,87,.2)}
+.card-icon{font-size:20px;margin-bottom:10px;display:block}
+.card-title{font-size:14px;font-weight:800;margin-bottom:7px;line-height:1.3}
 .card-body{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65}
-.card-body strong{color:#fff}
-.card-body .hi{color:#b8ff57}
-.card-body .or{color:#ff8a3c}
+.card-body strong,.hi{color:#b8ff57}
+.or{color:#ff8a3c}
 
-/* event cards row */
-.events-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;max-width:1060px}
-.ev-card{border-radius:14px;overflow:hidden;position:relative;background:#111;border:1px solid rgba(255,255,255,.08)}
-.ev-img{width:100%;height:200px;object-fit:cover;object-position:top;display:block;opacity:.85}
-.ev-info{padding:14px 16px}
-.ev-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#b8ff57;margin-bottom:4px}
-.ev-title{font-size:14px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:4px}
-.ev-meta{font-size:12px;color:rgba(255,255,255,.4)}
-.ev-badge{display:inline-block;margin-top:8px;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700}
+/* flowmap */
+.flow{display:flex;align-items:stretch;gap:0;width:100%;max-width:1040px;margin:0 auto}
+.flow-step{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:22px 18px;text-align:left;position:relative}
+.flow-step.feat{background:rgba(184,255,87,.05);border-color:rgba(184,255,87,.2)}
+.flow-arrow{display:flex;align-items:center;justify-content:center;width:36px;flex-shrink:0;color:rgba(255,255,255,.2);font-size:18px}
+.flow-num{font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:8px}
+.flow-icon{font-size:22px;margin-bottom:8px;display:block}
+.flow-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3}
+.flow-body{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6}
+.flow-body strong{color:#b8ff57}
+.flow-tag{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(184,255,87,.1);color:#b8ff57}
 
-/* insight bar */
-.insight{display:flex;align-items:center;gap:12px;padding:14px 20px;background:rgba(184,255,87,.05);border:1px solid rgba(184,255,87,.15);border-radius:12px;max-width:1060px;width:100%;margin-top:14px}
-.insight p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.55;margin:0}
-.insight p strong{color:#b8ff57}
+/* event cards */
+.ev-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%;max-width:1020px;text-align:left}
+.ev-card{border-radius:14px;overflow:hidden;background:#111;border:1px solid rgba(255,255,255,.08)}
+.ev-img{width:100%;height:160px;object-fit:cover;object-position:top;display:block;opacity:.9}
+.ev-info{padding:12px 14px}
+.ev-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#b8ff57;margin-bottom:3px}
+.ev-title{font-size:13px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:3px}
+.ev-meta{font-size:11px;color:rgba(255,255,255,.4)}
 
-/* traction slide */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1060px;width:100%;align-items:start}
-.wa-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);flex-shrink:0}
-.wa-wrap img{width:100%;display:block;max-height:420px;object-fit:cover;object-position:top}
-.signal-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;margin-bottom:10px}
-.signal-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
-.signal-body{font-size:12px;color:rgba(255,255,255,.45);line-height:1.55}
-.signal-body .hi{color:#b8ff57}
+/* offer pills row */
+.offer-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:1020px;width:100%;margin-top:14px}
+.offer-pill{padding:10px 18px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-align:left;flex:1;min-width:160px}
+.offer-pill-icon{font-size:16px;margin-bottom:5px}
+.offer-pill-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px}
+.offer-pill-body{font-size:11px;color:rgba(255,255,255,.4);line-height:1.4}
 
-/* score pill */
-.score-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:rgba(184,255,87,.08);border:1px solid rgba(184,255,87,.2);font-size:12px;font-weight:700;color:#b8ff57;margin-top:8px}
-.score-ring{width:28px;height:28px;position:relative;flex-shrink:0}
-.score-ring svg{transform:rotate(-90deg)}
-.score-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#b8ff57}
+/* slide 4 */
+.wa-slide{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1020px;width:100%;align-items:center;text-align:left}
+.wa-img-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#111}
+.wa-img-wrap img{width:100%;display:block;height:auto}
+.goal-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px;margin-bottom:10px}
+.goal-card.feat{background:rgba(184,255,87,.04);border-color:rgba(184,255,87,.15)}
+.goal-num{font-size:10px;font-weight:800;color:#b8ff57;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.goal-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px}
+.goal-body{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5}
+.goal-body strong{color:#fff}
+.score-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:rgba(184,255,87,.08);border:1px solid rgba(184,255,87,.2);font-size:12px;font-weight:700;color:#b8ff57}
 </style>
 </head>
 <body>
@@ -80,123 +87,172 @@ body{font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antiali
 
 <div class="deck" id="deck">
 
-<!-- ═══ SLIDE 1: THE WHY ══════════════════════════════════════ -->
+<!-- ═══ SLIDE 1: THE WHY ═════════════════════════════════════ -->
 <div class="slide active">
-  <div style="max-width:1060px;width:100%">
-    <div class="eyebrow">Community · The Strategic Case</div>
-    <div class="title">Why Community.<br>Why ChronoAI.<br>Why Now.</div>
+  <div class="eyebrow">Community · The Strategic Case</div>
+  <div class="title">Why Community.<br>Why ChronoAI.<br>Why Now.</div>
 
-    <div class="grid">
-      <div class="card featured">
-        <span class="card-icon">🌱</span>
-        <div class="card-title" style="color:#b8ff57">Singapore's AI Scene Is Primed — but Fragmented</div>
-        <div class="card-body">Events selling out in hours. <span class="hi">250 for OpenClaw x Alibaba. 132 for AI Demo Night.</span> The appetite is massive — but there's no single home for this community. That's the gap ChronoAI steps into.</div>
-      </div>
-      <div class="card">
-        <span class="card-icon">🤝</span>
-        <div class="card-title">What We Bring to Partners</div>
-        <div class="card-body">We don't just show up — we <strong>co-build.</strong> We give partners <span class="hi">distribution to qualified builders and founders</span>, a credible co-host with a real product behind it, and events that fill rooms. That's rare. That's leverage.</div>
-      </div>
-      <div class="card">
-        <span class="card-icon">🔁</span>
-        <div class="card-title">The Compounding Loop</div>
-        <div class="card-body">Every event grows the community. Every community member becomes a potential <strong>user, advocate, or partner.</strong> <span class="or">This is how you build distribution without paid ads.</span> Community is the moat.</div>
-      </div>
-      <div class="card">
-        <span class="card-icon">🎯</span>
-        <div class="card-title">People Don't Want Tools — They Want to Belong</div>
-        <div class="card-body">PRCA proved it. IWD proved it. <strong>People stayed, exchanged contacts, asked "when can we work together?"</strong> They're not buying a product — they're <span class="hi">joining something they believe in.</span></div>
-      </div>
+  <div class="grid">
+    <div class="card feat">
+      <span class="card-icon">🌱</span>
+      <div class="card-title" style="color:#b8ff57">Singapore's AI Scene Is Primed — but Fragmented</div>
+      <div class="card-body">Events filling up in hours. The appetite is massive — but there's <strong>no single home</strong> for this community yet. That's the gap ChronoAI steps into.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🤝</span>
+      <div class="card-title">What We Bring to Partners</div>
+      <div class="card-body">We don't just show up — we <span class="hi">co-build.</span> We give partners distribution to qualified builders and founders, a credible co-host with a real product, and events that fill rooms.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔁</span>
+      <div class="card-title">The Compounding Loop</div>
+      <div class="card-body">Every event grows the community. Every member becomes a potential <strong>user, advocate, or partner.</strong> <span class="or">This is how you build distribution without paid ads.</span> Community is the moat.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎯</span>
+      <div class="card-title">People Don't Want Tools — They Want to Belong</div>
+      <div class="card-body">PRCA proved it. IWD proved it. People stayed, exchanged contacts, asked <strong>"when can we work together?"</strong> They're not buying a product — they're <span class="hi">joining something they believe in.</span></div>
     </div>
   </div>
 </div>
 
-<!-- ═══ SLIDE 2: THE BENCHMARK ═══════════════════════════════ -->
+<!-- ═══ SLIDE 2: FLOWMAP ══════════════════════════════════════ -->
 <div class="slide">
-  <div style="max-width:1060px;width:100%">
-    <div class="eyebrow">Inspiration · What We're Building Toward</div>
-    <div class="title" style="font-size:clamp(36px,4vw,54px);margin-bottom:6px">The Room We Want<br>ChronoAI In.</div>
-    <p class="subtitle" style="margin-bottom:20px">These are Singapore's AI events filling up right now. Study the format, the energy, the people. <span style="color:#b8ff57">This is our benchmark.</span></p>
+  <div class="eyebrow">Strategy · How It Flows</div>
+  <div class="title" style="font-size:clamp(36px,4vw,54px)">The Play —<br>From Community to Brand.</div>
+  <p class="subtitle">This isn't a campaign. It's a system. Each stage feeds the next — organically.</p>
 
-    <div class="events-row">
-      <div class="ev-card">
-        <img src="./img/carousell-demo.png" alt="AI Demo Night at Carousell" class="ev-img">
-        <div class="ev-info">
-          <div class="ev-label">9 March · Sold Out</div>
-          <div class="ev-title">AI Demo Night @ Carousell HQ</div>
-          <div class="ev-meta">AI.SEA x Carousell · 132 attendees</div>
-          <div class="ev-meta" style="margin-top:4px;color:rgba(255,255,255,.55);font-size:12px;line-height:1.4">"Show, don't tell" — builders demo live products. No pitches. No decks. Just real work.</div>
-          <span class="ev-badge" style="background:rgba(255,69,58,.12);color:#ff453a">Event Full</span>
-        </div>
-      </div>
-      <div class="ev-card">
-        <img src="./img/openclaw-alibaba.png" alt="OpenClaw x Alibaba Qwen" class="ev-img">
-        <div class="ev-info">
-          <div class="ev-label">11 March · Sold Out</div>
-          <div class="ev-title">OpenClaw x Alibaba Qwen x The AI Capitol</div>
-          <div class="ev-meta">Hosted by Lionel Sim · 250 going</div>
-          <div class="ev-meta" style="margin-top:4px;color:rgba(255,255,255,.55);font-size:12px;line-height:1.4">Fireside chat. Live demos. Builders, founders, and AI practitioners. <span style="color:#b8ff57">Lionel Sim runs this</span> — our hackathon judge.</div>
-          <span class="ev-badge" style="background:rgba(255,69,58,.12);color:#ff453a">Event Full</span>
-        </div>
-      </div>
-      <div class="ev-card">
-        <img src="./img/openclaw-codex.png" alt="OpenClaw x Codex" class="ev-img">
-        <div class="ev-info">
-          <div class="ev-label">19 March · Registration Open</div>
-          <div class="ev-title">OpenClaw x Codex Community — Singapore</div>
-          <div class="ev-meta">OpenAI's Codex Community · Students + Builders</div>
-          <div class="ev-meta" style="margin-top:4px;color:rgba(255,255,255,.55);font-size:12px;line-height:1.4">Lightning talks, project demos, networking. The grassroots builder layer — <span style="color:#b8ff57">exactly our audience.</span></div>
-          <span class="ev-badge" style="background:rgba(184,255,87,.1);color:#b8ff57">Upcoming</span>
-        </div>
+  <div class="flow">
+    <div class="flow-step feat">
+      <div class="flow-num">01</div>
+      <span class="flow-icon">💬</span>
+      <div class="flow-title">Community Seeding</div>
+      <div class="flow-body">WhatsApp channels. Social media. Attract people interested in <strong>AI, vibe coding, and building.</strong> Spark organic conversations — no agenda, just curiosity.</div>
+      <span class="flow-tag">Entry Point</span>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-num">02</div>
+      <span class="flow-icon">🔍</span>
+      <div class="flow-title">Partner Outreach</div>
+      <div class="flow-body">Reach partners active in these communities. Understand <strong>what topics are hot,</strong> what people are asking for. Identify conversations that spark genuine interest.</div>
+      <span class="flow-tag">Intelligence Layer</span>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-num">03</div>
+      <span class="flow-icon">🎪</span>
+      <div class="flow-title">Events & Activations</div>
+      <div class="flow-body">Co-create programming with partners. Events that <strong>educate, activate, and grow</strong> the ChronoAI brand — not just shows, but experiences people remember.</div>
+      <span class="flow-tag">Momentum Builder</span>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" style="border-color:rgba(184,255,87,.15)">
+      <div class="flow-num">04</div>
+      <span class="flow-icon">🏛️</span>
+      <div class="flow-title">ChronoAI as the Hub</div>
+      <div class="flow-body">Organic. Always relevant. The <strong>go-to partner for Singapore's AI community</strong> — fostering healthy discussions and growing the ecosystem together.</div>
+      <span class="flow-tag" style="background:rgba(184,255,87,.18)">The Endgame</span>
+    </div>
+  </div>
+
+  <div style="margin-top:18px;padding:13px 20px;background:rgba(184,255,87,.04);border:1px solid rgba(184,255,87,.12);border-radius:12px;max-width:1040px;width:100%">
+    <p style="font-size:13px;color:rgba(255,255,255,.55);margin:0;line-height:1.55">💡 <strong style="color:#b8ff57">This week I'm at Stage 1 → 2.</strong> Building the community foundation and activating partner conversations — so by the time we run events, the audience is already there.</p>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 3: THE ROOM ════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Inspiration · The Room We Want ChronoAI In</div>
+  <div class="title" style="font-size:clamp(32px,4vw,50px)">These Rooms Are<br>Already Filling Up.</div>
+  <p class="subtitle" style="margin-bottom:18px">Singapore's AI community is gathering right now. Study the format. Study the energy. This is what we're building toward.</p>
+
+  <div class="ev-row">
+    <div class="ev-card">
+      <img src="./img/carousell-demo.png" alt="AI Demo Night" class="ev-img">
+      <div class="ev-info">
+        <div class="ev-label">9 March · Sold Out · 132 Going</div>
+        <div class="ev-title">AI Demo Night @ Carousell HQ</div>
+        <div class="ev-meta">AI.SEA x Carousell — "Show, don't tell." Builders demo live. No pitches. No decks.</div>
       </div>
     </div>
+    <div class="ev-card">
+      <img src="./img/openclaw-alibaba.png" alt="OpenClaw x Alibaba" class="ev-img">
+      <div class="ev-info">
+        <div class="ev-label">11 March · Sold Out · 250 Going</div>
+        <div class="ev-title">OpenClaw x Alibaba Qwen x The AI Capitol</div>
+        <div class="ev-meta">Hosted by Lionel Sim. Fireside chats, live demos — our judge runs this room.</div>
+      </div>
+    </div>
+    <div class="ev-card">
+      <img src="./img/openclaw-codex.png" alt="OpenClaw x Codex" class="ev-img">
+      <div class="ev-info">
+        <div class="ev-label">19 March · Upcoming</div>
+        <div class="ev-title">OpenClaw x OpenAI Codex Community</div>
+        <div class="ev-meta">Students + builders + OpenAI community. Lightning talks, project demos, networking.</div>
+      </div>
+    </div>
+  </div>
 
-    <div class="insight">
-      <span style="font-size:20px;flex-shrink:0">💡</span>
-      <p>These events don't have a <strong>$10K prize.</strong> We do. They don't have a product like ChronoAI behind them. We do. <strong>We're not late to this — we're about to be the best version of it.</strong></p>
+  <div class="offer-row">
+    <div class="offer-pill">
+      <div class="offer-pill-icon">🏢</div>
+      <div class="offer-pill-title">Venue & Space</div>
+      <div class="offer-pill-body">A real space for the community to gather, build, and share</div>
+    </div>
+    <div class="offer-pill">
+      <div class="offer-pill-icon">💡</div>
+      <div class="offer-pill-title">Ideation Hub</div>
+      <div class="offer-pill-body">Space to test new app ideas and tools with real builders</div>
+    </div>
+    <div class="offer-pill">
+      <div class="offer-pill-icon">🤝</div>
+      <div class="offer-pill-title">Collaboration Access</div>
+      <div class="offer-pill-body">Direct access to founders, investors, and technical builders</div>
+    </div>
+    <div class="offer-pill">
+      <div class="offer-pill-icon">📖</div>
+      <div class="offer-pill-title">Shared Workflows</div>
+      <div class="offer-pill-body">Learn from one another — share what works, grow together</div>
     </div>
   </div>
 </div>
 
-<!-- ═══ SLIDE 3: ALREADY MOVING ══════════════════════════════ -->
+<!-- ═══ SLIDE 4: ALREADY MOVING + GOALS ═════════════════════ -->
 <div class="slide">
-  <div style="max-width:1060px;width:100%">
-    <div class="eyebrow">This Week · We Already Started</div>
-    <div class="title" style="font-size:clamp(36px,4vw,52px);margin-bottom:6px">Community.<br>Already Moving.</div>
+  <div style="width:100%;max-width:1020px">
+    <div class="eyebrow" style="text-align:center">This Week · Already Moving</div>
+    <div class="title" style="font-size:clamp(34px,4vw,52px);margin-bottom:6px">Community.<br>Already Moving.</div>
+    <p class="subtitle" style="margin-bottom:20px">We didn't wait. The ChronoAI community WhatsApp launched yesterday. <span style="color:#b8ff57">Wendy Wang and Lionel Sim are already in the chat.</span> Day 1.</p>
 
-    <div class="two-col">
-      <div>
-        <p style="font-size:13px;color:rgba(255,255,255,.45);margin-bottom:14px;line-height:1.6">We didn't wait. The ChronoAI community WhatsApp launched yesterday. <span style="color:#b8ff57">Wendy Wang and Lionel Sim are already in the chat.</span> People are discussing, sharing events, making connections. Day 1.</p>
-        <div class="wa-wrap">
-          <img src="./img/whatsapp-community.png" alt="ChronoAI WhatsApp Community">
-        </div>
+    <div class="wa-slide">
+      <div class="wa-img-wrap">
+        <img src="./img/whatsapp-community.png" alt="ChronoAI WhatsApp Community">
       </div>
+
       <div>
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.3);margin-bottom:12px">What I'm Executing This Week</div>
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.3);margin-bottom:12px;text-align:left">What I'm Executing This Week</div>
 
-        <div class="signal-card" style="border-color:rgba(184,255,87,.15);background:rgba(184,255,87,.04)">
-          <div class="signal-title" style="color:#b8ff57">① Community — 50+ Qualified Members</div>
-          <div class="signal-body">Builders, founders & investors only. Co-promoted with First Prompt or ChatandBuild. <span class="hi">Not random joins — qualified people who want to be here.</span></div>
+        <div class="goal-card feat">
+          <div class="goal-num">Goal 1</div>
+          <div class="goal-title">WhatsApp Community — 50+ Qualified Members</div>
+          <div class="goal-body">Builders, founders & investors only. Co-promoted with First Prompt or ChatandBuild. <strong>Not random joins — people who genuinely want to be here.</strong></div>
         </div>
 
-        <div class="signal-card">
-          <div class="signal-title">② Event Strategy — Theme Locked with Fan</div>
-          <div class="signal-body">Consulting Fan — he's built these events before. Coming back with a decision, not a question. <strong style="color:#fff">1 confirmed partner or speaker commitment by Friday.</strong></div>
+        <div class="goal-card">
+          <div class="goal-num">Goal 2</div>
+          <div class="goal-title">Event Theme Locked — with Fan</div>
+          <div class="goal-body">Consulting Fan — he's built these events before. Coming back with a decision, not a question. <strong>1 confirmed partner or speaker commitment by Friday.</strong></div>
         </div>
 
-        <div class="signal-card">
-          <div class="signal-title">③ Pipeline — 30+ Named Qualified Leads</div>
-          <div class="signal-body">1 strategic co-promotion partner (500+ reach). Every lead tracked by name. <strong style="color:#fff">Interest log shared in team channel.</strong></div>
+        <div class="goal-card">
+          <div class="goal-num">Goal 3</div>
+          <div class="goal-title">30+ Named Qualified Leads via Co-Promotion</div>
+          <div class="goal-body">1 strategic partner (500+ reach). Every lead tracked by name and contact. <strong>Interest log shared in team channel.</strong></div>
         </div>
 
-        <div style="display:flex;align-items:center;gap:10px;margin-top:14px">
-          <div class="score-pill">
-            <div class="score-ring">
-              <svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11" fill="none" stroke="rgba(184,255,87,.15)" stroke-width="3"/><circle cx="14" cy="14" r="11" fill="none" stroke="#b8ff57" stroke-width="3" stroke-linecap="round" stroke-dasharray="69.1" stroke-dashoffset="6.9"/></svg>
-              <div class="score-num">9</div>
-            </div>
-            Goal Audit: 9 / 10 — Zero Violations
-          </div>
+        <div style="text-align:left;margin-top:14px">
+          <span class="score-pill">✦ Goal Audit: 9 / 10 — Zero Violations</span>
         </div>
       </div>
     </div>
