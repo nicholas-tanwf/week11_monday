@@ -36,16 +36,19 @@ body{font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antiali
 .or{color:#ff8a3c}
 
 /* flowmap */
-.flow{display:flex;align-items:stretch;gap:0;width:100%;max-width:1040px;margin:0 auto}
-.flow-step{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:22px 18px;text-align:left;position:relative}
-.flow-step.feat{background:rgba(184,255,87,.05);border-color:rgba(184,255,87,.2)}
-.flow-arrow{display:flex;align-items:center;justify-content:center;width:36px;flex-shrink:0;color:rgba(255,255,255,.2);font-size:18px}
-.flow-num{font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:8px}
-.flow-icon{font-size:22px;margin-bottom:8px;display:block}
-.flow-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3}
-.flow-body{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6}
-.flow-body strong{color:#b8ff57}
-.flow-tag{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(184,255,87,.1);color:#b8ff57}
+.fmap{display:flex;align-items:flex-start;width:100%;max-width:1060px;margin:0 auto;gap:0}
+.fstep{flex:1;border-radius:16px;padding:18px 16px;text-align:left;position:relative;border-width:1px;border-style:solid}
+.fstep-num{font-size:28px;font-weight:900;line-height:1;margin-bottom:6px}
+.fstep-icon{font-size:18px;margin-bottom:8px;display:block}
+.fstep-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3}
+.fstep-why{font-size:11px;font-weight:600;font-style:italic;line-height:1.5;margin-bottom:10px;padding:6px 10px;border-radius:8px}
+.fstep-bullets{font-size:11px;color:rgba(255,255,255,.45);line-height:1.7}
+.fstep-tag{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700}
+.fconn{display:flex;flex-direction:column;align-items:center;justify-content:center;width:42px;flex-shrink:0;padding-top:54px;gap:3px}
+.fconn-label{font-size:8px;font-weight:800;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;transform:rotate(-90deg);margin-bottom:-2px}
+.fconn-line{width:2px;height:32px;background:rgba(255,255,255,.1);position:relative;margin:0 auto}
+.fconn-line::after{content:'';position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(255,255,255,.2)}
+.fconn-arrow{font-size:22px;color:rgba(255,255,255,.18);line-height:1}
 
 /* event cards */
 .ev-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%;max-width:1020px;text-align:left}
@@ -116,48 +119,96 @@ body{font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antiali
   </div>
 </div>
 
-<!-- ═══ SLIDE 2: FLOWMAP ══════════════════════════════════════ -->
+<!-- ═══ SLIDE 2: FLOWMAP (REDESIGNED) ══════════════════════════════════════ -->
 <div class="slide">
-  <div class="eyebrow">Strategy · How It Flows</div>
-  <div class="title" style="font-size:clamp(36px,4vw,54px)">The Play —<br>From Community to Brand.</div>
-  <p class="subtitle">This isn't a campaign. It's a system. Each stage feeds the next — organically.</p>
+  <div class="eyebrow">Strategic Reframe · Starting From Truth</div>
+  <div class="title" style="font-size:clamp(32px,3.8vw,50px);margin-bottom:6px">The Original Logic<br>Was Backwards.</div>
 
-  <div class="flow">
-    <div class="flow-step feat">
-      <div class="flow-num">01</div>
-      <span class="flow-icon">💬</span>
-      <div class="flow-title">Community Seeding</div>
-      <div class="flow-body">WhatsApp channels. Social media. Attract people interested in <strong>AI, vibe coding, and building.</strong> Spark organic conversations — no agenda, just curiosity.</div>
-      <span class="flow-tag">Entry Point</span>
+  <!-- Old vs New diagnosis bar -->
+  <div style="display:flex;gap:10px;margin-bottom:16px;max-width:1060px;width:100%;align-items:stretch">
+    <div style="flex:1;padding:10px 16px;border-radius:10px;background:rgba(255,59,48,.05);border:1px solid rgba(255,59,48,.2);text-align:left">
+      <div style="font-size:9px;font-weight:800;color:rgba(255,59,48,.7);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px">❌ Old Logic (what management flagged)</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.45);line-height:1.5">"We want to run a hackathon" → find audience → justify it after. <em>Cart before the horse.</em></div>
     </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <div class="flow-num">02</div>
-      <span class="flow-icon">🔍</span>
-      <div class="flow-title">Partner Outreach</div>
-      <div class="flow-body">Reach partners active in these communities. Understand <strong>what topics are hot,</strong> what people are asking for. Identify conversations that spark genuine interest.</div>
-      <span class="flow-tag">Intelligence Layer</span>
+    <div style="display:flex;align-items:center;color:rgba(255,255,255,.2);font-size:18px;flex-shrink:0">→</div>
+    <div style="flex:1;padding:10px 16px;border-radius:10px;background:rgba(184,255,87,.05);border:1px solid rgba(184,255,87,.2);text-align:left">
+      <div style="font-size:9px;font-weight:800;color:#b8ff57;text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px">✅ Right Logic (where we're going)</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.5">Real gap exists → identify the underserved crowd → seed organically → <em>events emerge from community trust.</em></div>
     </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <div class="flow-num">03</div>
-      <span class="flow-icon">🎪</span>
-      <div class="flow-title">Events & Activations</div>
-      <div class="flow-body">Co-create programming with partners. Events that <strong>educate, activate, and grow</strong> the ChronoAI brand — not just shows, but experiences people remember.</div>
-      <span class="flow-tag">Momentum Builder</span>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step" style="border-color:rgba(184,255,87,.15)">
-      <div class="flow-num">04</div>
-      <span class="flow-icon">🏛️</span>
-      <div class="flow-title">ChronoAI as the Hub</div>
-      <div class="flow-body">Organic. Always relevant. The <strong>go-to partner for Singapore's AI community</strong> — fostering healthy discussions and growing the ecosystem together.</div>
-      <span class="flow-tag" style="background:rgba(184,255,87,.18)">The Endgame</span>
+    <div style="display:flex;flex-direction:column;justify-content:center;padding:10px 16px;border-radius:10px;background:rgba(100,210,255,.05);border:1px solid rgba(100,210,255,.2);flex-shrink:0">
+      <div style="font-size:9px;font-weight:800;color:#64d2ff;text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px">🎯 Audience Picked</div>
+      <div style="font-size:11px;color:#fff;font-weight:700;line-height:1.4">Vibe Coders</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.4);line-height:1.4">Makers, not devs.<br>Underserved. Growing.</div>
     </div>
   </div>
 
-  <div style="margin-top:18px;padding:13px 20px;background:rgba(184,255,87,.04);border:1px solid rgba(184,255,87,.12);border-radius:12px;max-width:1040px;width:100%">
-    <p style="font-size:13px;color:rgba(255,255,255,.55);margin:0;line-height:1.55">💡 <strong style="color:#b8ff57">This week I'm at Stage 1 → 2.</strong> Building the community foundation and activating partner conversations — so by the time we run events, the audience is already there.</p>
+  <!-- Flowmap -->
+  <div class="fmap">
+
+    <!-- STEP 1 -->
+    <div class="fstep" style="background:rgba(184,255,87,.05);border-color:rgba(184,255,87,.22)">
+      <div class="fstep-num" style="color:#b8ff57">01</div>
+      <span class="fstep-icon">🌱</span>
+      <div class="fstep-title">Find the Gap.<br>Seed the Space.</div>
+      <div class="fstep-why" style="color:#b8ff57;background:rgba(184,255,87,.08)">WHY: OpenClaw serves devs. Vibe coders — builders who create without traditional code — have no home. We build that home before we promote anything.</div>
+      <div class="fstep-bullets">· WhatsApp channel — live now<br>· Social content, organic only<br>· No brand push. Just presence.</div>
+      <span class="fstep-tag" style="background:rgba(184,255,87,.12);color:#b8ff57;border:1px solid rgba(184,255,87,.2)">Entry Point</span>
+    </div>
+
+    <!-- CONNECTOR 1→2 -->
+    <div class="fconn">
+      <div class="fconn-label">informs</div>
+      <div style="font-size:26px;color:rgba(255,255,255,.18);margin-top:4px">➜</div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="fstep" style="background:rgba(100,210,255,.04);border-color:rgba(100,210,255,.18)">
+      <div class="fstep-num" style="color:#64d2ff">02</div>
+      <span class="fstep-icon">🔍</span>
+      <div class="fstep-title">Listen to the<br>Community First.</div>
+      <div class="fstep-why" style="color:#64d2ff;background:rgba(100,210,255,.07)">WHY: Don't create events — discover what the community already wants. Partners know what topics are hot. That becomes our agenda, not the other way round.</div>
+      <div class="fstep-bullets">· Outreach to active community partners<br>· Map what people are asking<br>· Identify genuine pain points</div>
+      <span class="fstep-tag" style="background:rgba(100,210,255,.1);color:#64d2ff;border:1px solid rgba(100,210,255,.18)">Intelligence Layer</span>
+    </div>
+
+    <!-- CONNECTOR 2→3 -->
+    <div class="fconn">
+      <div class="fconn-label">leads to</div>
+      <div style="font-size:26px;color:rgba(255,255,255,.18);margin-top:4px">➜</div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="fstep" style="background:rgba(255,138,60,.04);border-color:rgba(255,138,60,.18)">
+      <div class="fstep-num" style="color:#ff8a3c">03</div>
+      <span class="fstep-icon">🎪</span>
+      <div class="fstep-title">Events Are the<br>Output. Not the Plan.</div>
+      <div class="fstep-why" style="color:#ff8a3c;background:rgba(255,138,60,.07)">WHY: By the time we host an event, the audience is already there. Trust is already built. We co-create programming based on what we know the community wants.</div>
+      <div class="fstep-bullets">· Co-built with community partners<br>· Agenda comes from listening (Step 2)<br>· People show up because they belong</div>
+      <span class="fstep-tag" style="background:rgba(255,138,60,.1);color:#ff8a3c;border:1px solid rgba(255,138,60,.18)">Momentum Builder</span>
+    </div>
+
+    <!-- CONNECTOR 3→4 -->
+    <div class="fconn">
+      <div class="fconn-label">builds</div>
+      <div style="font-size:26px;color:rgba(255,255,255,.18);margin-top:4px">➜</div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="fstep" style="background:rgba(191,90,242,.04);border-color:rgba(191,90,242,.2)">
+      <div class="fstep-num" style="color:#bf5af2">04</div>
+      <span class="fstep-icon">🏛️</span>
+      <div class="fstep-title">ChronoAI as<br>Singapore's AI Hub.</div>
+      <div class="fstep-why" style="color:#bf5af2;background:rgba(191,90,242,.07)">WHY: Not a company hosting events. A community that ChronoAI anchors — organically. Participants self-organise. That's what management said community should look like.</div>
+      <div class="fstep-bullets">· Ecosystem partner, not event organiser<br>· Community self-initiates<br>· Every member is a distribution channel</div>
+      <span class="fstep-tag" style="background:rgba(191,90,242,.12);color:#bf5af2;border:1px solid rgba(191,90,242,.2)">The Endgame</span>
+    </div>
+
+  </div>
+
+  <!-- Stage indicator -->
+  <div style="margin-top:14px;padding:11px 20px;background:rgba(184,255,87,.04);border:1px solid rgba(184,255,87,.1);border-radius:10px;max-width:1060px;width:100%;display:flex;align-items:center;gap:10px">
+    <div style="width:8px;height:8px;border-radius:50%;background:#b8ff57;flex-shrink:0;box-shadow:0 0 8px rgba(184,255,87,.5)"></div>
+    <p style="font-size:12px;color:rgba(255,255,255,.5);margin:0;line-height:1.55"><strong style="color:#b8ff57">This week: Stage 1 → 2.</strong> Community is seeded (WhatsApp live, Wendy + Lionel already in). Now activating partner conversations — so by the time we run events, the room is already full.</p>
   </div>
 </div>
 
